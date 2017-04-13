@@ -150,15 +150,14 @@ int main(void)
     NRF_LOG_INFO("\r\nTWI sensor example\r\n");
     NRF_LOG_FLUSH();
     twi_init();
+        ssd1306_begin(SSD1306_SWITCHCAPVCC, SSD1306_I2C_ADDRESS, false);
 
-    ssd1306_begin(SSD1306_SWITCHCAPVCC, SSD1306_I2C_ADDRESS, false);
-
-    nrf_delay_ms(500);
+    nrf_delay_ms(1000);
     puts("--- START ---");
 
-    nrf_delay_ms(500);
+    nrf_delay_ms(1000);
     ssd1306_display();
-    nrf_delay_ms(500);
+    nrf_delay_ms(1000);
 
     testdrawline();
     while (true)

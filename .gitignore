@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.o
+pca10040/blank/armgcc/_build/nrf52832_xxaa_i22c.c.o
+*.o
+pca10040/blank/armgcc/_build/nrf52832_xxaa_main.c.o

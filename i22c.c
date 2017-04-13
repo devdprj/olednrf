@@ -58,7 +58,7 @@ void twi_init (void)
        .clear_bus_init     = false
     };
 
-    err_code = nrf_drv_twi_init(&m_twi_master, &twi_lm75b_config, twi_handler, NULL);
+    err_code = nrf_drv_twi_init(&m_twi_master, &twi_lm75b_config, NULL, NULL);
     APP_ERROR_CHECK(err_code);
 
     nrf_drv_twi_enable(&m_twi_master);
