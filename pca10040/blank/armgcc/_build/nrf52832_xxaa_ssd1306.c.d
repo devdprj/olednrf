@@ -60,7 +60,8 @@ _build/nrf52832_xxaa_ssd1306.c.o: ../../../ssd1306.c \
  ../../../../../../components/libraries/util/app_util_platform.h \
  ../../../../../../components/device/compiler_abstraction.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
- ../../../glcdfont.c
+ ../../../../../../components/boards/boards.h \
+ ../../../../../../components/boards/pca10040.h ../../../glcdfont.c
 
 /usr/local/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/stdio.h:
 
@@ -187,5 +188,9 @@ _build/nrf52832_xxaa_ssd1306.c.o: ../../../ssd1306.c \
 ../../../../../../components/device/compiler_abstraction.h:
 
 ../../../../../../components/libraries/util/nrf_assert.h:
+
+../../../../../../components/boards/boards.h:
+
+../../../../../../components/boards/pca10040.h:
 
 ../../../glcdfont.c:

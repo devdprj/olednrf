@@ -4,6 +4,7 @@
 #include "app_error.h"
 #include "nrf_drv_twi.h"
 #include "nrf_delay.h"
+#include "boards.h"
 
 #define NRF_LOG_MODULE_NAME "APP"
 #include "nrf_log.h"
@@ -38,6 +39,7 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
             }
             m_xfer_done = true;
             break;
+            
         default:
             break;
     }
@@ -51,8 +53,8 @@ void twi_init (void)
     ret_code_t err_code;
 
     const nrf_drv_twi_config_t twi_lm75b_config = {
-       .scl                = ARDUINO_SCL_PIN,
-       .sda                = ARDUINO_SDA_PIN,
+       .scl                = 27,
+       .sda                = 26,
        .frequency          = NRF_TWI_FREQ_100K,
        .interrupt_priority = APP_IRQ_PRIORITY_HIGH,
        .clear_bus_init     = false

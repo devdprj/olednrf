@@ -11,6 +11,7 @@
 #include "ssd1306.h"
 #include "app_error.h"
 #include "app_util_platform.h"
+#include "boards.h"
 
 static uint8_t _i2caddr, _vccstate;
 static uint32_t _rs;
@@ -166,6 +167,7 @@ void ssd1306_begin(uint8_t vccstate, uint8_t i2caddr, bool reset)
     _vccstate = vccstate;
     _i2caddr = i2caddr;
     UNUSED_VARIABLE(_i2caddr);
+    init_ssd1306();
 
     _width    = WIDTH;
     _height   = HEIGHT;
@@ -212,7 +214,7 @@ void ssd1306_begin(uint8_t vccstate, uint8_t i2caddr, bool reset)
     else {
         ssd1306_command(0x14);
     }
-    ssd1306_command(SSD1306_MEMORYMODE);                    // 0x20
+    ssd1306_command(SSD1306_M#include "boards.h"EMORYMODE);                    // 0x20
     ssd1306_command(0x00);                                  // 0x0 act like ks0108
     ssd1306_command(SSD1306_SEGREMAP | 0x1);
     ssd1306_command(SSD1306_COMSCANDEC);
@@ -475,6 +477,10 @@ void ssd1306_data(uint8_t c)
         ret_code_t ret;
         uint8_t dta_send[] = {0x40, c};
         ret = nrf_drv_twi_tx(&m_twi_master, _i2caddr, dta_send, 2, false);
+        if(ret == 0x11)
+        {
+        	bsp_board_led_on(1);
+        }
         UNUSED_VARIABLE(ret);
     }
     else {

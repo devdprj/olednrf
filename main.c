@@ -11,10 +11,12 @@
 #include "ssd1306.h"
 #include "binary.h"
 
+
 extern uint8_t time_buffer[128];
 
 #define LOGO16_GLCD_HEIGHT 16
 #define LOGO16_GLCD_WIDTH  16
+
 
 static const unsigned char /*PROGMEM*/ logo16_glcd_bmp[] = {
     B00000000, B11000000,
@@ -50,7 +52,6 @@ void testdrawchar(void)
     }
     ssd1306_display();
 }
-
 
 void testdrawline(void)
 {
@@ -143,6 +144,7 @@ void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h)
 }
 
 
+
 int main(void)
 {
     APP_ERROR_CHECK(NRF_LOG_INIT(NULL));
@@ -150,6 +152,7 @@ int main(void)
     NRF_LOG_INFO("\r\nTWI sensor example\r\n");
     NRF_LOG_FLUSH();
     twi_init();
+//    initUart();
         ssd1306_begin(SSD1306_SWITCHCAPVCC, SSD1306_I2C_ADDRESS, false);
 
     nrf_delay_ms(1000);
@@ -158,7 +161,7 @@ int main(void)
     nrf_delay_ms(1000);
     ssd1306_display();
     nrf_delay_ms(1000);
-
+bsp_board_led_on(0);
     testdrawline();
     while (true)
     {
