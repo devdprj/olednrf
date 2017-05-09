@@ -490,10 +490,11 @@ void ssd1306_data(uint8_t c)
 
 void ssd1306_display(void)
 {
-    ssd1306_command(SSD1306_COLUMNADDR);
+        static uint8_t control = 0x40;
+        int ii=0;            
+        ssd1306_command(SSD1306_COLUMNADDR);
     ssd1306_command(0);   // Column start address (0 = reset)
     ssd1306_command(SSD1306_LCDWIDTH - 1); // Column end address (127 = reset)
-
     ssd1306_command(SSD1306_PAGEADDR);
     ssd1306_command(0); // Page start address (0 = reset)
 #if SSD1306_LCDHEIGHT == 64
@@ -505,15 +506,22 @@ void ssd1306_display(void)
 #if SSD1306_LCDHEIGHT == 16
     ssd1306_command(1); // Page end address
 #endif
-
-    if (use_i2c) {
-        static uint8_t control = 0x40;
-        nrf_drv_twi_tx(&m_twi_master, _i2caddr, &control, 1, true);
-        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer,(unsigned char) (SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8), false);
-    }
-    else {
-
-    }
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, &control, 1, false);
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer+ii, 128, false);
+        ii += 128;
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer+ii,128, false);
+        ii += 128;
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer+ii,128, false);
+        ii += 128;
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer+ii,128, false);
+        ii += 128;
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer+ii,128, false);
+        ii += 128;
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer+ii,128, false);
+        ii += 128;
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer+ii,128, false);
+        ii += 128;
+        nrf_drv_twi_tx(&m_twi_master, _i2caddr, buffer+ii,128, false);
 }
 
 // clear everything
